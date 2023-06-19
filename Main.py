@@ -34,8 +34,8 @@ while(game_over == False):
     jugador_1.update(tecla)
 
     # Dibujos
-    jugador_1.dibujar(ventana)
     laberinto.dibujar(ventana)
+    jugador_1.dibujar(ventana)
 
     # Se renderiza el juego desde acá
     pygame.display.flip()
