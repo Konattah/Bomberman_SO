@@ -7,10 +7,10 @@ class escenario(pygame.sprite.Sprite):
         self.ancho = ancho
         self.alto = alto
         carpeta_imagenes = os.path.join('kenney_tiny-town', 'Tiles')
-        self.bordes_imagenes = [pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0044.png')).convert_alpha(),
-                                pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0045.png')).convert_alpha(),
-                                pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0046.png')).convert_alpha(),
-                                pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0056.png')).convert_alpha()]
+        self.bordes_imagenes = [pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0096.png')).convert_alpha(),
+                                pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0097.png')).convert_alpha(),
+                                pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0098.png')).convert_alpha(),
+                                pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0108.png')).convert_alpha()]
         
         escenario.redimensionar(self)
 
