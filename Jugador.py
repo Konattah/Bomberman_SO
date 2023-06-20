@@ -39,7 +39,7 @@ class lucy(pygame.sprite.Sprite):
 
 
     def redimensionar(self):
-        redimension = (60, 60)
+        redimension = (40, 40)
         for i in range(0, 4):
             self.abajo_imagenes[i]     = pygame.transform.scale(self.abajo_imagenes[i], redimension)
             self.arriba_imagenes[i]    = pygame.transform.scale(self.arriba_imagenes[i], redimension)

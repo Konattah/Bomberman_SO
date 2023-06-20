@@ -11,7 +11,7 @@ class escenario(pygame.sprite.Sprite):
                                 pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0097.png')).convert_alpha(),
                                 pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0098.png')).convert_alpha(),
                                 pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0108.png')).convert_alpha(),
-                                pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0109.png')).convert_alpha()]
+                                pygame.image.load(os.path.join(carpeta_imagenes, 'tile_0002.png')).convert_alpha()]
         
         escenario.redimensionar(self)
 
