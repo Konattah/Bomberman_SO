@@ -4,7 +4,7 @@ import os
 class lucy(pygame.sprite.Sprite):
     def __init__(self, ancho, alto):
         super().__init__()
-        carpeta_imagenes = os.path.join('Imagenes_de_prueba', 'Lucy')
+        carpeta_imagenes = os.path.join('Imagenes', 'Lucy')
         self.derecha_imagenes   = [pygame.image.load(os.path.join(carpeta_imagenes, 'Derecha', '1.png')).convert_alpha(),
                                    pygame.image.load(os.path.join(carpeta_imagenes, 'Derecha', '2.png')).convert_alpha(),
                                    pygame.image.load(os.path.join(carpeta_imagenes, 'Derecha', '3.png')).convert_alpha(),
@@ -48,28 +48,28 @@ class lucy(pygame.sprite.Sprite):
 
 
     def update(self, teclas_presionadas):
-        if teclas_presionadas[pygame.K_w] and self.rect.y > 40:
+        if teclas_presionadas[pygame.K_w] and self.rect.y > 0:
             self.rect.y -= self.velocidad
             self.indice_animacion += 1
             if self.indice_animacion >= len(self.arriba_imagenes):
                 self.indice_animacion = 0
             self.imagen_actual = self.arriba_imagenes[self.indice_animacion]
 
-        elif teclas_presionadas[pygame.K_s] and self.rect.y < (self.alto - (self.rect.height + 40)):
+        elif teclas_presionadas[pygame.K_s] and self.rect.y < (self.alto - self.rect.height):
             self.rect.y += self.velocidad
             self.indice_animacion += 1
             if self.indice_animacion >= len(self.abajo_imagenes):
                 self.indice_animacion = 0
             self.imagen_actual = self.abajo_imagenes[self.indice_animacion]
 
-        elif teclas_presionadas[pygame.K_a] and self.rect.x > 40:
+        elif teclas_presionadas[pygame.K_a] and self.rect.x > 0:
             self.rect.x -= self.velocidad
             self.indice_animacion += 1
             if self.indice_animacion >= len(self.izquierda_imagenes):
                 self.indice_animacion = 0
             self.imagen_actual = self.izquierda_imagenes[self.indice_animacion]
 
-        elif teclas_presionadas[pygame.K_d] and self.rect.x < (self.ancho - (self.rect.width + 40)) :
+        elif teclas_presionadas[pygame.K_d] and self.rect.x < (self.ancho - self.rect.width) :
             self.rect.x += self.velocidad
             self.indice_animacion += 1
             if self.indice_animacion >= len(self.derecha_imagenes):

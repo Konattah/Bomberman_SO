@@ -7,8 +7,8 @@ from Escenario import escenario
 pygame.init()
 
 # Cosas de la ventana
-ancho_ventana = 1280
-alto_ventana = 720
+ancho_ventana = 800
+alto_ventana = 600
 ventana = pygame.display.set_mode((ancho_ventana, alto_ventana))
 pygame.display.set_caption("Bomberman")
 
