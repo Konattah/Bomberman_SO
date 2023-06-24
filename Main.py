@@ -14,7 +14,7 @@ pygame.display.set_caption("Bomberman")
 
 #Reloj
 clock = pygame.time.Clock()
-fps = 60
+fps = 20
 
 game_over = False
 jugador_1 = lucy(ancho_ventana, alto_ventana)
