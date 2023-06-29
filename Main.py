@@ -7,7 +7,7 @@ from Jugador import jugador
 
 # Constantes
 bloques_tamanio = (40, 40)
-jugador_tamanio = (30, 30) 
+jugador_tamanio = (40, 40) 
 
 
 suelo = [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
