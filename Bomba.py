@@ -1,80 +1,36 @@
 import pygame
 import os
+import time
 
-class lucy(pygame.sprite.Sprite):
-    def __init__(self, ancho, alto):
-        super().__init__()
-        carpeta_imagenes = os.path.join('Imagenes', 'Lucy')
-        self.derecha_imagenes   = [pygame.image.load(os.path.join(carpeta_imagenes, 'Derecha', '1.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Derecha', '2.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Derecha', '3.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Derecha', '4.png')).convert_alpha()]
+class bomba(pygame.sprite.Sprite):
+    def __init__(self, tamanio, posicion_y, posicion_x):
+        pygame.sprite.Sprite.__init__(self)
         
-        self.izquierda_imagenes = [pygame.image.load(os.path.join(carpeta_imagenes, 'Izquierda', '1.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Izquierda', '2.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Izquierda', '3.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Izquierda', '4.png')).convert_alpha()]
+        self.bomba = pygame.image.load(os.path.join('Imagenes/Bomba/bomb.png')).convert_alpha()
+        self.bomba = pygame.transform.scale(self.bomba, (tamanio, tamanio))
+        self.explosion_1 = pygame.image.load(os.path.join('Imagenes/Bomba/exp1.png')).convert_alpha()
+        self.explosion_1 = pygame.transform.scale(self.explosion_1, (tamanio, tamanio))
+        self.explosion_2 = pygame.image.load(os.path.join('Imagenes/Bomba/exp2.png')).convert_alpha()
+        self.explosion_2 = pygame.transform.scale(self.explosion_2, (tamanio, tamanio))
+        self.explosion_3 = pygame.image.load(os.path.join('Imagenes/Bomba/exp3.png')).convert_alpha()
+        self.explosion_3 = pygame.transform.scale(self.explosion_3, (tamanio, tamanio))
+
+        self.imagenes = [self.bomba, self.explosion_1, self.explosion_2, self.explosion_3]
+
+        self.imagen_actual = 0
+        self.image = self.imagenes[self.imagen_actual]
+        self.rect = self.image.get_rect()
+        self.rect.y = posicion_y
+        self.rect.x = posicion_x
+
+        self.tiempo_inicial = time.time()
         
-        
-        self.arriba_imagenes    = [pygame.image.load(os.path.join(carpeta_imagenes, 'Arriba', '1.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Arriba', '2.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Arriba', '3.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Arriba', '4.png')).convert_alpha()]
-        
-        
-        self.abajo_imagenes     = [pygame.image.load(os.path.join(carpeta_imagenes, 'Abajo', '1.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Abajo', '2.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Abajo', '3.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'Abajo', '4.png')).convert_alpha()]
-        
-        self.redimensionar()
 
-        self.alto = alto
-        self.ancho = ancho
-        self.indice_animacion = 0
-        self.imagen_actual = self.abajo_imagenes[self.indice_animacion]
-        self.rect = self.imagen_actual.get_rect()
-        self.rect.center = (20, 20)
-        self.velocidad = 10
-
-    def redimensionar(self):
-        redimension = (30, 30)
-        for i in range(0, 4):
-            self.abajo_imagenes[i]     = pygame.transform.scale(self.abajo_imagenes[i], redimension)
-            self.arriba_imagenes[i]    = pygame.transform.scale(self.arriba_imagenes[i], redimension)
-            self.derecha_imagenes[i]   = pygame.transform.scale(self.derecha_imagenes[i], redimension)
-            self.izquierda_imagenes[i] = pygame.transform.scale(self.izquierda_imagenes[i], redimension)
-
-
-    def update(self, teclas_presionadas):
-        teclas_presionadas = teclas_presionadas
-        if teclas_presionadas[pygame.K_w] and self.rect.y > 0:
-            self.rect.y = self.rect.y - self.velocidad 
-            self.indice_animacion += 1
-            if self.indice_animacion >= len(self.arriba_imagenes):
-                self.indice_animacion = 0
-            self.imagen_actual = self.arriba_imagenes[self.indice_animacion]
-
-        elif teclas_presionadas[pygame.K_s] and self.rect.y < (self.alto - self.rect.height):
-            self.rect.y = self.rect.y + self.velocidad
-            self.indice_animacion += 1
-            if self.indice_animacion >= len(self.abajo_imagenes):
-                self.indice_animacion = 0
-            self.imagen_actual = self.abajo_imagenes[self.indice_animacion]
-
-        elif teclas_presionadas[pygame.K_a] and self.rect.x > 0:
-            self.rect.x = self.rect.x - self.velocidad
-            self.indice_animacion += 1
-            if self.indice_animacion >= len(self.izquierda_imagenes):
-                self.indice_animacion = 0
-            self.imagen_actual = self.izquierda_imagenes[self.indice_animacion]
-
-        elif teclas_presionadas[pygame.K_d] and self.rect.x < (self.ancho - self.rect.width):
-            self.rect.x = self.rect.x + self.velocidad
-            self.indice_animacion += 1
-            if self.indice_animacion >= len(self.derecha_imagenes):
-                self.indice_animacion = 0
-            self.imagen_actual = self.derecha_imagenes[self.indice_animacion]
-
-    def dibujar(self, ventana):
-        ventana.blit(self.imagen_actual, self.rect)
+    def update(self):
+        tiempo_transcurrido = time.time() - self.tiempo_inicial
+        if tiempo_transcurrido >= 3:
+            self.imagen_actual += 1
+            if(self.imagen_actual != len(self.imagenes) - 1):
+                self.image = self.imagenes[self.imagen_actual]
+            else:
+                self.kill()

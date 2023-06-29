@@ -41,6 +41,7 @@ fps = 30
 all_rompibles = pygame.sprite.Group()
 all_irrompibles = pygame.sprite.Group()
 all_jugador1 = pygame.sprite.Group()
+all_bombas = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 
 
@@ -53,12 +54,13 @@ for f in range(len(suelo)):
         elif suelo[f][c] == 1:
             azar = random.randint(1, 4)
             if azar == 1 or azar == 3:
-                all_rompibles.add(rompible(c, f,bloques_tamanio[0]))
+                madera = rompible(c, f, bloques_tamanio[0])
+                all_rompibles.add(madera)
                 suelo[f][c] = 1
             else:
                 suelo[f][c] = 0
         elif suelo[f][c] == 3:
-            jugador1 = jugador(c, f,bloques_tamanio[0])
+            jugador1 = jugador(c, f, all_bombas, all_sprites, bloques_tamanio[0])
             all_jugador1.add(jugador1)
             suelo[f][c] = 0
 
@@ -66,6 +68,7 @@ for f in range(len(suelo)):
 all_sprites.add(all_irrompibles)
 all_sprites.add(all_rompibles)
 all_sprites.add(all_jugador1)
+all_sprites.add(all_bombas)
 
 while(game_over == False):
     # Eventitos que van sucediendo
@@ -78,7 +81,9 @@ while(game_over == False):
 
     # Se guarda la tecla que se vaya a presionar
     tecla = pygame.key.get_pressed()
+
     jugador1.update(tecla, suelo)
+    all_bombas.update()
 
     # Dibujos
     all_sprites.draw(ventana)
