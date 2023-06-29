@@ -6,8 +6,7 @@ from Escenario import irrompible, rompible
 from Jugador import jugador
 
 # Constantes
-bloques_tamanio = (40, 40)
-jugador_tamanio = (40, 40) 
+bloques_tamanio = 40
 
 
 suelo = [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -50,17 +49,17 @@ game_over = False
 for f in range(len(suelo)):
     for c in range(len(suelo[f])):
         if suelo[f][c] == -1:
-            all_irrompibles.add(irrompible(c, f, bloques_tamanio[0]))
+            all_irrompibles.add(irrompible(c, f, bloques_tamanio))
         elif suelo[f][c] == 1:
             azar = random.randint(1, 4)
             if azar == 1 or azar == 3:
-                madera = rompible(c, f, bloques_tamanio[0])
+                madera = rompible(c, f, bloques_tamanio)
                 all_rompibles.add(madera)
                 suelo[f][c] = 1
             else:
                 suelo[f][c] = 0
         elif suelo[f][c] == 3:
-            jugador1 = jugador(c, f, all_bombas, all_sprites, bloques_tamanio[0])
+            jugador1 = jugador(c, f, all_bombas, all_sprites, all_rompibles, bloques_tamanio, suelo)
             all_jugador1.add(jugador1)
             suelo[f][c] = 0
 
@@ -68,7 +67,6 @@ for f in range(len(suelo)):
 all_sprites.add(all_irrompibles)
 all_sprites.add(all_rompibles)
 all_sprites.add(all_jugador1)
-all_sprites.add(all_bombas)
 
 while(game_over == False):
     # Eventitos que van sucediendo
@@ -82,7 +80,7 @@ while(game_over == False):
     # Se guarda la tecla que se vaya a presionar
     tecla = pygame.key.get_pressed()
 
-    jugador1.update(tecla, suelo)
+    jugador1.update(tecla)
     all_bombas.update()
 
     # Dibujos
