@@ -1,26 +1,28 @@
 import pygame
 import os
 
-class escenario(pygame.sprite.Sprite):
-    def __init__(self, ancho, alto):
-        super().__init__()
-        self.ancho = ancho
-        self.alto = alto
-        carpeta_imagenes = os.path.join('Imagenes', 'Escenario')
-        self.escenario_imagenes = [pygame.image.load(os.path.join(carpeta_imagenes, 'ground_06.png')).convert_alpha(),
-                                   pygame.image.load(os.path.join(carpeta_imagenes, 'crate_19.png')).convert_alpha()]
-                                
-        
-        self.redimensionar()
+class irrompible(pygame.sprite.Sprite):
+    def __init__(self, c, f, tamanio):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(os.path.join('Imagenes', 'Escenario', 'crate_19.png')).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (tamanio, tamanio))
+        self.rect = self.image.get_rect()
+        self.rect.x =  c * tamanio
+        self.rect.y = f * tamanio
 
-        self.rect_fondo = self.escenario_imagenes[0].get_rect()
-        self.rect_irrompible = self.escenario_imagenes[1].get_rect()
 
-    def redimensionar(self):
-        dimension = (40, 40)
-        for i in range(0, len(self.escenario_imagenes)):
-            self.escenario_imagenes[i] = pygame.transform.scale(self.escenario_imagenes[i], dimension)
+class rompible(pygame.sprite.Sprite):
+    def __init__(self, c, f, tamanio):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(os.path.join('Imagenes', 'Escenario', 'crate_10.png')).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (tamanio, tamanio))
+        self.rect = self.image.get_rect()
+        self.rect.x =  c * tamanio
+        self.rect.y = f * tamanio
+        self.posicion_x = c
+        self.posicion_y = f
 
+    '''
     def dibujar(self, ventana):
         cantidad_bordes_ancho = self.ancho // self.rect_fondo.height
         cantidad_bordes_alto = self.alto // self.rect_fondo.height
@@ -32,6 +34,6 @@ class escenario(pygame.sprite.Sprite):
         cantidad_irrompible_alto = cantidad_bordes_alto - 1
         for x in range(1, cantidad_irrompible_ancho, 2):
             for y in range(1, cantidad_irrompible_alto, 2):
-                ventana.blit(self.escenario_imagenes[1], (x * self.rect_irrompible.width, y * self.rect_irrompible.height))
+                ventana.blit(self.escenario_imagenes[1], (x * self.rect_irrompible.width, y * self.rect_irrompible.height))'''
 
 
