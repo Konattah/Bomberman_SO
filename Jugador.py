@@ -3,7 +3,7 @@ import os
 from Bomba import bomba
 
 class jugador(pygame.sprite.Sprite):
-    def __init__(self, c, f, all_bomba, all_sprites, all_rompibles, tamanio, suelo):
+    def __init__(self, c, f, all_bomba, all_sprites, all_rompibles, tamanio, suelo, all_jugador):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(os.path.join('Imagenes', 'Lucy', 'Abajo', '1.png')).convert_alpha()
         self.image = pygame.transform.scale(self.image, (tamanio, tamanio))
@@ -23,6 +23,7 @@ class jugador(pygame.sprite.Sprite):
         self.all_bomba = all_bomba
         self.all_sprites = all_sprites
         self.all_rompibles = all_rompibles
+        self.all_jugador = all_jugador
 
     def update(self, tecla):
         if tecla[pygame.K_w]:
@@ -49,7 +50,7 @@ class jugador(pygame.sprite.Sprite):
             self.SoltarBomba()
 
     def SoltarBomba(self):
-        nueva_bomba = bomba(self.tamanio + 10, self.rect.center, self.posicion_x, self.posicion_y, self.all_bomba, self.all_sprites, self.all_rompibles, self.suelo)
+        nueva_bomba = bomba(self.tamanio + 10, self.rect.center, self.posicion_x, self.posicion_y, self.all_bomba, self.all_rompibles, self.suelo, self.all_jugador)
         self.all_bomba.add(nueva_bomba)
         self.all_sprites.add(nueva_bomba)
         

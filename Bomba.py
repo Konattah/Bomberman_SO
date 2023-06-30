@@ -3,7 +3,7 @@ import os
 import time
 
 class bomba(pygame.sprite.Sprite):
-    def __init__(self, tamanio, centro, posicion_x, posicion_y, all_bomba, all_sprites, all_rompibles, suelo):
+    def __init__(self, tamanio, centro, posicion_x, posicion_y, all_bomba, all_rompibles, suelo, all_jugador):
         pygame.sprite.Sprite.__init__(self)
         
         self.bomba = pygame.image.load(os.path.join('Imagenes/Bomba/bomb.png')).convert_alpha()
@@ -28,8 +28,8 @@ class bomba(pygame.sprite.Sprite):
         self.posicion_y = posicion_y
 
         self.all_bomba = all_bomba
-        self.all_sprites = all_sprites
         self.all_rompibles = all_rompibles
+        self.all_jugador = all_jugador
         self.suelo = suelo
         
 
@@ -51,4 +51,17 @@ class bomba(pygame.sprite.Sprite):
                             if (madera.posicion_y, madera.posicion_x) in direcciones:
                                 self.suelo[madera.posicion_y][madera.posicion_x] = 0
                                 madera.kill()
+
+                    colision_pj = pygame.sprite.groupcollide(self.all_bomba, self.all_jugador, False, False)
+                    for (bomba, jugador_alcanzado) in colision_pj.items():
+                        direcciones = [(self.posicion_y + 1, self.posicion_x),
+                                       (self.posicion_y - 1, self.posicion_x),
+                                       (self.posicion_y, self.posicion_x + 1),
+                                       (self.posicion_y, self.posicion_x - 1),
+                                       (self.posicion_y, self.posicion_x)]
+                        for jugador in jugador_alcanzado:
+                            if (jugador.posicion_y, jugador.posicion_x) in direcciones:
+                                self.suelo[jugador.posicion_y][jugador.posicion_x] = 0
+                                jugador.kill()
+
                     self.kill()

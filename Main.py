@@ -39,7 +39,7 @@ fps = 30
 # Grupos de sprites
 all_rompibles = pygame.sprite.Group()
 all_irrompibles = pygame.sprite.Group()
-all_jugador1 = pygame.sprite.Group()
+all_jugador = pygame.sprite.Group()
 all_bombas = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 
@@ -59,14 +59,14 @@ for f in range(len(suelo)):
             else:
                 suelo[f][c] = 0
         elif suelo[f][c] == 3:
-            jugador1 = jugador(c, f, all_bombas, all_sprites, all_rompibles, bloques_tamanio, suelo)
-            all_jugador1.add(jugador1)
+            jugador1 = jugador(c, f, all_bombas, all_sprites, all_rompibles, bloques_tamanio, suelo, all_jugador)
+            all_jugador.add(jugador1)
             suelo[f][c] = 0
 
 
 all_sprites.add(all_irrompibles)
 all_sprites.add(all_rompibles)
-all_sprites.add(all_jugador1)
+all_sprites.add(all_jugador)
 
 while(game_over == False):
     # Eventitos que van sucediendo
