@@ -89,7 +89,7 @@ while(game_over == False):
     # Se renderiza el juego desde acá
     pygame.display.flip()
     
-    # Limita el juego a 60 FPS
+    # Limita los fps del juego
     clock.tick(fps) 
 
 pygame.quit()
