@@ -63,5 +63,4 @@ class bomba(pygame.sprite.Sprite):
                             if (jugador.posicion_y, jugador.posicion_x) in direcciones:
                                 self.suelo[jugador.posicion_y][jugador.posicion_x] = 0
                                 jugador.kill()
-
                     self.kill()
